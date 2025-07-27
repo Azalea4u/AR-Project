@@ -604,6 +604,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5606115421390605776}
   - component: {fileID: 6574387296209300053}
+  - component: {fileID: 8856863826629965911}
   m_Layer: 0
   m_Name: Fish_3_v1
   m_TagString: Untagged
@@ -650,6 +651,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!136 &8856863826629965911
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5082097677804754794}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.05
+  m_Height: 0.13
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -0.02}
 --- !u!1 &5336716233236716295
 GameObject:
   m_ObjectHideFlags: 0
