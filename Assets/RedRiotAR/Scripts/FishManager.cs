@@ -5,6 +5,7 @@ public class FishManager : MonoBehaviour
 {
     public FishData[] fishTypes;
     public MashReel mashReel;
+    [SerializeField] private Canvas UI_Canvas;
 
     public void Castline()
     {
