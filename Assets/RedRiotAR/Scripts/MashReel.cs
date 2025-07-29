@@ -175,8 +175,7 @@ public class MashReel : MonoBehaviour
     {
         progressBarSlider.value = hookProgress;
 
-        // No longer auto-increment progress for being in the zone
-        // Only degrade progress if not mashing or mashing at the wrong time
+        // degrade progress if not mashing or mashing at the wrong time
         float min = hookPosition - hookSize / 2;
         float max = hookPosition + hookSize / 2;
 
@@ -204,7 +203,6 @@ public class MashReel : MonoBehaviour
 
     public event System.Action OnFishCaught;
     public event System.Action OnFishLost;
-
     private void FishCaught()
     {
         pause = true;
