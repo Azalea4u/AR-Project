@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem; // For InputAction
 
 public class MashReel : MonoBehaviour
 {
@@ -38,6 +39,19 @@ public class MashReel : MonoBehaviour
 
     float failTimer = 10f;                               // Time before failing if progress is not made
 
+    // INPUTS
+    private InputAction mashAction;                     // InputAction for mash/tap
+    private bool mashPressed;                           // Flag set when mash/tap is performed
+
+
+    private void Awake()
+    {
+        // Create a new InputAction for tap/mash (mouse left button or touchscreen tap)
+        mashAction = new InputAction(type: InputActionType.Button, binding: "<Pointer>/press");
+        mashAction.performed += ctx => mashPressed = true;
+        mashAction.Enable();
+    }
+
     private void Start()
     {
         // Initialize fish data and UI
@@ -54,6 +68,15 @@ public class MashReel : MonoBehaviour
         // Ensure UI is resized and hook is positioned when enabled
         Resize();
         SetStaticHook();
+    }
+
+    private void OnDisable()
+    {
+        if (mashAction != null)
+        {
+            mashAction.Disable();
+            mashAction.performed -= ctx => mashPressed = true;
+        }
     }
 
     /// <summary>
@@ -134,18 +157,14 @@ public class MashReel : MonoBehaviour
     /// </summary>
     private void MashInput()
     {
-        bool mashPressed = false;
-
-        // Mouse input (desktop)
-        if (Input.GetMouseButtonDown(0))
-            mashPressed = true;
+        mashPressed = false;
 
         // Touch input (mobile/tablet)
         if (Input.touchCount > 0)
         {
             for (int i = 0; i < Input.touchCount; i++)
             {
-                if (Input.GetTouch(i).phase == TouchPhase.Began)
+                if (Input.GetTouch(i).phase == UnityEngine.TouchPhase.Began)
                 {
                     mashPressed = true;
                     break;
