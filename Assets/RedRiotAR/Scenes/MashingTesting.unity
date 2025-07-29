@@ -1145,7 +1145,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishTypes:
   - {fileID: 11400000, guid: 42160e26496f8d74ab5a5673e5470b96, type: 2}
+  - {fileID: 11400000, guid: 3a28e5a036e1c2a408091e08753d271b, type: 2}
+  - {fileID: 11400000, guid: 24c2d4ba527307a40aff843d960d65ad, type: 2}
+  - {fileID: 11400000, guid: 73e8d590e5239b04d8ef5fbe648745dc, type: 2}
+  - {fileID: 11400000, guid: d64d5bbe37a8b7c44ad1778ca5bfab8d, type: 2}
   mashReel: {fileID: 1692364843}
+  UI_Canvas: {fileID: 109304393}
 --- !u!4 &1250698690
 Transform:
   m_ObjectHideFlags: 0
@@ -1329,21 +1334,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eacdf301dcadbb347bb7e9d5c8093737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentFishData: {fileID: 11400000, guid: e8279cd517fefae46abe39083d6276d4, type: 2}
   topPivot: {fileID: 1104260847}
   bottomPivot: {fileID: 1975888984}
   fish: {fileID: 1124122485}
-  timerMultiplier: 5
-  smoothMotion: 25
   hook: {fileID: 8474672}
-  hookSize: 0.1
-  hookPower: 4
-  hookPullPower: 0.01
-  hookGravityPower: 0.005
-  hookProgressDegradationPower: 0.2
   hookImage: {fileID: 8474673}
   progressBarContainer: {fileID: 986904731}
   progressBarSlider: {fileID: 986904732}
-  failTimer: 20
 --- !u!4 &1765540924 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6605111590819766859, guid: 50924a69bc9ab5c4b8cae43318993198,

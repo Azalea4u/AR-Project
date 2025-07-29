@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8341b70b296903048b4facb4e1d51d1d, type: 3}
-  m_Name: Penguin_Test
+  m_Name: Fish_01
   m_EditorClassIdentifier: 
-  fishName: Penguin
+  fishName: Fish_01
   MashMin: 5
   MashMax: 10
-  timeLimit: 100
+  timeLimit: 25
   fishMoveSpeed: 1
-  fishPrefab: {fileID: 744816229875429926, guid: a7c08f297d68e204c92f1e94eac82902,
+  fishPrefab: {fileID: 2576910639401555240, guid: 38453c08482feef46925c63d2e9e6598,
     type: 3}
   hookSizeMin: 0.15
   hookSizeMax: 0.25
