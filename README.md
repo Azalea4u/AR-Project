@@ -10,7 +10,7 @@ Dakota Partney, Dian Nguyen, Landon Stevens
 
 &nbsp;
 ## Technical Details
-Made using Unity (6000.0.36f1) with Niantic SDK. 
+Made using Unity (6000.0.36f1) with Niantic SDK. Utilizes location based markerless tracking.
 
 &nbsp;
 ## How To Run
