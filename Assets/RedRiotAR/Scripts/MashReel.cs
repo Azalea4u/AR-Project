@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.InputSystem; // For InputAction
+using UnityEngine.InputSystem;
 
 public class MashReel : MonoBehaviour
 {
@@ -39,17 +39,31 @@ public class MashReel : MonoBehaviour
 
     float failTimer = 10f;                               // Time before failing if progress is not made
 
-    // INPUTS
-    private InputAction mashAction;                     // InputAction for mash/tap
-    private bool mashPressed;                           // Flag set when mash/tap is performed
-
+    [Header("Input System")]
+    [SerializeField] private InputActionAsset inputActions;
+    private InputAction tapAction;
+    private InputAction tapPositionAction;
 
     private void Awake()
     {
-        // Create a new InputAction for tap/mash (mouse left button or touchscreen tap)
-        mashAction = new InputAction(type: InputActionType.Button, binding: "<Pointer>/press");
-        mashAction.performed += ctx => mashPressed = true;
-        mashAction.Enable();
+        if (inputActions != null)
+        {
+            inputActions.Enable();
+            tapAction = inputActions.FindAction("Tap");
+            tapPositionAction = inputActions.FindAction("TapPosition");
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (tapAction != null)
+            tapAction.performed += OnTapPerformed;
+    }
+
+    private void OnDisable()
+    {
+        if (tapAction != null)
+            tapAction.performed -= OnTapPerformed;
     }
 
     private void Start()
@@ -63,25 +77,7 @@ public class MashReel : MonoBehaviour
         SetStaticHook();
     }
 
-    private void OnEnable()
-    {
-        // Ensure UI is resized and hook is positioned when enabled
-        Resize();
-        SetStaticHook();
-    }
-
-    private void OnDisable()
-    {
-        if (mashAction != null)
-        {
-            mashAction.Disable();
-            mashAction.performed -= ctx => mashPressed = true;
-        }
-    }
-
-    /// <summary>
-    /// Sets the current fish and applies its data.
-    /// </summary>
+    // Sets the current fish and applies its data.
     public void SetFish(FishData fishData)
     {
         currentFishData = fishData;
@@ -89,9 +85,7 @@ public class MashReel : MonoBehaviour
         ResetFishing();
     }
 
-    /// <summary>
-    /// Applies fish-specific settings from FishData.
-    /// </summary>
+    // Applies fish-specific settings from FishData.
     private void ApplyFishData(FishData fishData)
     {
         timerMultiplier = fishData.timeLimit;
@@ -105,9 +99,7 @@ public class MashReel : MonoBehaviour
         Resize();
     }
 
-    /// <summary>
-    /// Resets all gameplay variables for a new fishing attempt.
-    /// </summary>
+    // Resets all gameplay variables for a new fishing attempt.
     private void ResetFishing()
     {
         fishPosition = 0f;
@@ -126,13 +118,10 @@ public class MashReel : MonoBehaviour
             return; 
         }
         Fishing();
-        MashInput();
         ProgressCheck();
     }
 
-    /// <summary>
-    /// Resizes the hook zone UI to match the fishing area and hook size.
-    /// </summary>
+    // Resizes the hook zone UI to match the fishing area and hook size.
     private void Resize()
     {
         float ySize = hookImage.rectTransform.rect.height;
@@ -142,57 +131,37 @@ public class MashReel : MonoBehaviour
         hook.localScale = ls;
     }
 
-    /// <summary>
-    /// Sets the hook to the middle of the fishing zone.
-    /// </summary>
+    // Sets the hook to the middle of the fishing zone.
     private void SetStaticHook()
     {
         hookPosition = 0.5f;
         hook.position = Vector3.Lerp(bottomPivot.position, topPivot.position, hookPosition);
     }
 
-    /// <summary>
-    /// Handles mash input from mouse or touchscreen.
-    /// Only increases progress if fish is inside the hook zone.
-    /// </summary>
-    private void MashInput()
+    // Called when the "Tap" action is performed.
+    private void OnTapPerformed(InputAction.CallbackContext context)
     {
-        mashPressed = false;
+        // Optionally, get tap position if needed for future logic
+        Vector2 touchPosition = Vector2.zero;
+        if (tapPositionAction != null)
+            touchPosition = tapPositionAction.ReadValue<Vector2>();
 
-        // Touch input (mobile/tablet)
-        if (Input.touchCount > 0)
+        float min = hookPosition - hookSize / 2;
+        float max = hookPosition + hookSize / 2;
+
+        // Only allow progress if fish is in the hook zone
+        if (min < fishPosition && fishPosition < max)
         {
-            for (int i = 0; i < Input.touchCount; i++)
-            {
-                if (Input.GetTouch(i).phase == UnityEngine.TouchPhase.Began)
-                {
-                    mashPressed = true;
-                    break;
-                }
-            }
+            hookProgress += (hookPower / 10);
         }
-
-        if (mashPressed)
+        else
         {
-            float min = hookPosition - hookSize / 2;
-            float max = hookPosition + hookSize / 2;
-
-            // Only allow progress if fish is in the hook zone
-            if (min < fishPosition && fishPosition < max)
-            {
-                hookProgress += (hookPower / 10);
-            }
-            else
-            {
-                // Penalty for mashing at the wrong time
-                hookProgress -= hookProgressDegradationPower * 2;
-            }
+            // Penalize for mashing at the wrong time
+            hookProgress -= hookProgressDegradationPower * 2;
         }
     }
 
-    /// <summary>
-    /// Handles fish movement logic, picking new destinations at intervals.
-    /// </summary>
+    // Handles fish movement logic, picking new destinations at intervals.
     private void Fishing()
     {
         fishTimer -= Time.deltaTime;
@@ -208,9 +177,7 @@ public class MashReel : MonoBehaviour
         fish.position = Vector3.Lerp(bottomPivot.position, topPivot.position, fishPosition);
     }
 
-    /// <summary>
-    /// Updates the progress bar and checks for catch/fail conditions.
-    /// </summary>
+    // Updates the progress bar and checks for catch/fail conditions.
     private void ProgressCheck()
     {
         progressBarSlider.value = hookProgress;
@@ -241,18 +208,9 @@ public class MashReel : MonoBehaviour
         hookProgress = Mathf.Clamp(hookProgress, 0, 1f);
     }
 
-    /// <summary>
-    /// Event triggered when fish is caught.
-    /// </summary>
     public event System.Action OnFishCaught;
-    /// <summary>
-    /// Event triggered when fish is lost.
-    /// </summary>
     public event System.Action OnFishLost;
 
-    /// <summary>
-    /// Handles fish caught logic.
-    /// </summary>
     private void FishCaught()
     {
         pause = true;
@@ -260,9 +218,6 @@ public class MashReel : MonoBehaviour
         OnFishCaught?.Invoke();
     }
 
-    /// <summary>
-    /// Handles fish lost logic.
-    /// </summary>
     private void FishLost()
     {
         pause = true;

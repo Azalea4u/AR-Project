@@ -1342,6 +1342,8 @@ MonoBehaviour:
   hookImage: {fileID: 8474673}
   progressBarContainer: {fileID: 986904731}
   progressBarSlider: {fileID: 986904732}
+  inputActions: {fileID: -944628639613478452, guid: 61a3eedb24336c8449ec9a28f9b3b196,
+    type: 3}
 --- !u!4 &1765540924 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6605111590819766859, guid: 50924a69bc9ab5c4b8cae43318993198,

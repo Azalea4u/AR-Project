@@ -1007,6 +1007,12 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -460904871355192338, guid: 9a674e6fc1319f5479147d1d40b73371, type: 3}
+--- !u!1 &1358090188 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1924055386221517761, guid: 1b96e20982622424298f903e83a4f4b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1458014804}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1363873727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1750,6 +1756,11 @@ PrefabInstance:
       propertyPath: UI_Canvas
       value: 
       objectReference: {fileID: 5708857}
+    - target: {fileID: 1642494057097748682, guid: 1db62cf32e6faef43b6e21b5922e415d,
+        type: 3}
+      propertyPath: fishCaught_Text
+      value: 
+      objectReference: {fileID: 1358090188}
     - target: {fileID: 3316428711766545348, guid: 1db62cf32e6faef43b6e21b5922e415d,
         type: 3}
       propertyPath: m_Name

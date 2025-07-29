@@ -44,7 +44,7 @@ public class FishCatchCelebrator : MonoBehaviour
 
     private IEnumerator Stop()
     {
-        yield return new WaitForSeconds(5f);  // Wait 5 seconds
+        yield return new WaitForSeconds(2.5f);  // Wait 5 seconds
 
         if (TitleUI != null) TitleUI.enabled = false;  // Hide text
 

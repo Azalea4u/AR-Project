@@ -8,11 +8,9 @@ public class FishManager : MonoBehaviour
     public FishData[] fishTypes;                    // Array of available fish types
     public MashReel mashReel;                       // Reference to the MashReel minigame
     [SerializeField] private GameObject FishPanel;  // Main fishing UI canvas
-    [SerializeField] private GameObject fishCaught_Text;
 
     private void Awake()
     {
-        // Subscribe to MashReel events for catch/loss
         if (mashReel != null)
         {
             mashReel.OnFishCaught += HandleFishingEnd;
