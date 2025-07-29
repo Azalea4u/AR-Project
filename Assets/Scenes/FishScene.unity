@@ -279,12 +279,18 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 5708856}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 5708859}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eacdf301dcadbb347bb7e9d5c8093737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5708859 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4587623273670102173, guid: 6aa41c8fb725c274fa02097bae949929,
+    type: 3}
+  m_PrefabInstance: {fileID: 5708856}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &10612056 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7964586289193100362, guid: ceb8b2a61cbd6c4448b5b37cf1d77f77,
@@ -1734,6 +1740,11 @@ PrefabInstance:
       propertyPath: mashReel
       value: 
       objectReference: {fileID: 5708858}
+    - target: {fileID: 1642494057097748682, guid: 1db62cf32e6faef43b6e21b5922e415d,
+        type: 3}
+      propertyPath: FishPanel
+      value: 
+      objectReference: {fileID: 5708859}
     - target: {fileID: 1642494057097748682, guid: 1db62cf32e6faef43b6e21b5922e415d,
         type: 3}
       propertyPath: UI_Canvas
