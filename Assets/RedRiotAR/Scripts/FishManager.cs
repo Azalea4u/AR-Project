@@ -7,8 +7,25 @@ public class FishManager : MonoBehaviour
     public MashReel mashReel;
     [SerializeField] private Canvas UI_Canvas;
 
+    private void Awake()
+    {
+        if (mashReel != null)
+        {
+            mashReel.OnFishCaught += HandleFishingEnd;
+            mashReel.OnFishLost += HandleFishingEnd;
+        }
+    }
+
+    private void HandleFishingEnd()
+    {
+        if (UI_Canvas != null)
+            UI_Canvas.enabled = false;
+    }
+
     public void Castline()
     {
+        if (UI_Canvas != null)
+            UI_Canvas.enabled = true;
         StartCoroutine(WaitForBite());
     }
 
@@ -17,7 +34,10 @@ public class FishManager : MonoBehaviour
         yield return new WaitForSeconds(Random.Range(2f, 5f));
         FishData selectedFish = GetRandomFish();
 
-        //mashReel.StartFishing(selectedFish);
+        if (selectedFish != null && mashReel != null)
+        {
+            mashReel.SetFish(selectedFish);
+        }
     }
 
     private FishData GetRandomFish()
