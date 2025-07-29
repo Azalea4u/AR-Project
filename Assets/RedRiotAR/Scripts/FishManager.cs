@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class FishManager : MonoBehaviour
 {
-    public static FishManager instance; // Singleton instance for global access
+    public static FishManager instance;             // Singleton instance for global access
 
-    public FishData[] fishTypes;        // Array of available fish types
-    public MashReel mashReel;           // Reference to the MashReel minigame
-    [SerializeField] private Canvas UI_Canvas; // Main fishing UI canvas
+    public FishData[] fishTypes;                    // Array of available fish types
+    public MashReel mashReel;                       // Reference to the MashReel minigame
+    [SerializeField] private GameObject FishPanel;  // Main fishing UI canvas
 
     private void Awake()
     {
@@ -29,14 +29,19 @@ public class FishManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        FishPanel.SetActive(false); // Initially hide the fishing UI
+    }
+
     /// <summary>
     /// Handles the end of a fishing attempt (caught or lost).
     /// Disables the fishing UI.
     /// </summary>
     private void HandleFishingEnd()
     {
-        if (UI_Canvas != null)
-            UI_Canvas.enabled = false;
+        if (FishPanel != null)
+            FishPanel.SetActive(false);
     }
 
     /// <summary>
@@ -44,8 +49,8 @@ public class FishManager : MonoBehaviour
     /// </summary>
     public void Castline()
     {
-        if (UI_Canvas != null)
-            UI_Canvas.enabled = true;
+        if (FishPanel != null)
+            FishPanel.SetActive(true);
         StartCoroutine(WaitForBite());
     }
 
@@ -89,5 +94,14 @@ public class FishManager : MonoBehaviour
         }
         int randomIndex = Random.Range(0, fishTypes.Length);
         return fishTypes[randomIndex];
+    }
+
+    public void EndFishing()
+    {
+        if (FishPanel != null)
+        {
+            FishPanel.SetActive(false);
+        }
+        mashReel.Reset(); // Reset the minigame state
     }
 }

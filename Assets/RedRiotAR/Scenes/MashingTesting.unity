@@ -1150,7 +1150,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 73e8d590e5239b04d8ef5fbe648745dc, type: 2}
   - {fileID: 11400000, guid: d64d5bbe37a8b7c44ad1778ca5bfab8d, type: 2}
   mashReel: {fileID: 1692364843}
-  UI_Canvas: {fileID: 109304393}
+  FishPanel: {fileID: 1692364839}
 --- !u!4 &1250698690
 Transform:
   m_ObjectHideFlags: 0

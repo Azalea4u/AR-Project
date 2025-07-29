@@ -250,4 +250,12 @@ public class MashReel : MonoBehaviour
         Debug.Log("FISH LOST!");
         OnFishLost?.Invoke();
     }
+
+    public void Reset()
+    {
+        // Reset all variables to initial state
+        ResetFishing();
+        SetStaticHook();
+        Resize();
+    }
 }

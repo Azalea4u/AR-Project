@@ -19,7 +19,7 @@ MonoBehaviour:
   fishMoveSpeed: 0.5
   fishPrefab: {fileID: 6817605226350521283, guid: 7eae7165760ea8e4392990af4666d35b,
     type: 3}
-  hookSizeMin: 0.125
-  hookSizeMax: 0.175
+  hookSizeMin: 0.13
+  hookSizeMax: 0.2
   hookPowerMin: 0.75
   hookPowerMax: 1.25
