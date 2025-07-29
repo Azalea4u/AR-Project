@@ -23,9 +23,9 @@ public class FishCatchCelebrator : MonoBehaviour
 
         // Uncomment if currentFishData is made public
         // Otherwise, will need to find another way
-        // GameObject fish = mashReel.currentFishData.fishPrefab;  // Get caught fish gameObject
+        GameObject fish = mashReel.currentFishData.fishPrefab;  // Get caught fish gameObject
         
-        GameObject fish = null;
+        // GameObject fish = null;
 
         if (fish != null)
         {

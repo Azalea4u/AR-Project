@@ -6,7 +6,7 @@ using UnityEngine.InputSystem; // For InputAction
 public class MashReel : MonoBehaviour
 {
     [Header("Fish Data")]
-    [SerializeField] private FishData currentFishData;  // Reference to the current fish's data
+    [SerializeField] public FishData currentFishData;   // Reference to the current fish's data
 
     [SerializeField] Transform topPivot;                // Top boundary of fishing area
     [SerializeField] Transform bottomPivot;             // Bottom boundary of fishing area
