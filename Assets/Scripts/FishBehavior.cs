@@ -13,6 +13,8 @@ public class FishBehavior : MonoBehaviour
     [Range(0.1f, 3)]
     public float speed = 1;
 
+    public bool caught = false;
+
 
     private void Start()
     {
@@ -21,7 +23,7 @@ public class FishBehavior : MonoBehaviour
         direction = transform.forward;
         rotation = Vector3.zero;
 
-        StartCoroutine(Turn());
+        if (!caught) StartCoroutine(Turn());
     }
 
     private void FixedUpdate()

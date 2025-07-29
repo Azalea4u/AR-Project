@@ -2058,6 +2058,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50924a69bc9ab5c4b8cae43318993198, type: 3}
+--- !u!1001 &9092286895994022824
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6217558595999314195, guid: 1b96e20982622424298f903e83a4f4b4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217558595999314195, guid: 1b96e20982622424298f903e83a4f4b4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217558595999314195, guid: 1b96e20982622424298f903e83a4f4b4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217558595999314195, guid: 1b96e20982622424298f903e83a4f4b4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217558595999314195, guid: 1b96e20982622424298f903e83a4f4b4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217558595999314195, guid: 1b96e20982622424298f903e83a4f4b4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217558595999314195, guid: 1b96e20982622424298f903e83a4f4b4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217558595999314195, guid: 1b96e20982622424298f903e83a4f4b4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217558595999314195, guid: 1b96e20982622424298f903e83a4f4b4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217558595999314195, guid: 1b96e20982622424298f903e83a4f4b4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6392413111940095318, guid: 1b96e20982622424298f903e83a4f4b4,
+        type: 3}
+      propertyPath: m_Name
+      value: Fish Catch Celebrator
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1b96e20982622424298f903e83a4f4b4, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2070,3 +2138,4 @@ SceneRoots:
   - {fileID: 811305409}
   - {fileID: 1250698690}
   - {fileID: 7396666682281829050}
+  - {fileID: 9092286895994022824}
