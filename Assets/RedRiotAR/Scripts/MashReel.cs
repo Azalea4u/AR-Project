@@ -5,44 +5,42 @@ using UnityEngine.UI;
 public class MashReel : MonoBehaviour
 {
     [Header("Fish Data")]
-    [SerializeField] private FishData currentFishData;
+    [SerializeField] private FishData currentFishData;  // Reference to the current fish's data
 
-    [SerializeField] Transform topPivot;
-    [SerializeField] Transform bottomPivot;
+    [SerializeField] Transform topPivot;                // Top boundary of fishing area
+    [SerializeField] Transform bottomPivot;             // Bottom boundary of fishing area
 
-    [SerializeField] Transform fish;
+    [SerializeField] Transform fish;                    // Fish transform to move
 
-    float fishPosition;
-    float fishDestination;
+    float fishPosition;                                 // Current normalized position of the fish (0 = bottom, 1 = top)
+    float fishDestination;                              // Target normalized position for the fish to move towards
 
-    float fishTimer;
-    float timerMultiplier = 3f;
+    float fishTimer;                                    // Timer for when the fish picks a new destination
+    float timerMultiplier = 3f;                         // How often the fish picks a new destination
 
-    float fishSpeed;
-    float smoothMotion = 1f;
+    float fishSpeed;                                    // Used by SmoothDamp for fish movement
+    float smoothMotion = 1f;                            // Smoothing factor for fish movement
 
     [Header("Hook Settings")]
-    [SerializeField] Transform hook;
-    float hookPosition;
-    float hookSize = 0.2f;
-    float hookPower = 1.0f;
-    float hookProgress;
-    float hookPullVelocity;
-    float hookPullPower = 0.01f;
-    float hookGravityPower = 0.005f;
-    float hookProgressDegradationPower = 0.03f;
+    [SerializeField] Transform hook;                    // Hook transform
+    float hookPosition;                                 // Current normalized position of the hook
+    float hookSize = 0.2f;                              // Size of the hook zone (normalized)
+    float hookPower = 1.0f;                             // Amount of progress gained per successful mash
+    float hookProgress;                                 // Current progress towards catching the fish
+    float hookProgressDegradationPower = 0.03f;         // How quickly progress degrades
 
-    [SerializeField] Image hookImage;
+    [SerializeField] Image hookImage;                   // UI image for the hook zone
 
-    [SerializeField] Transform progressBarContainer;
-    [SerializeField] Slider progressBarSlider;
+    [SerializeField] Transform progressBarContainer;    // Container for progress bar UI
+    [SerializeField] Slider progressBarSlider;          // Progress bar UI element
 
-    bool pause = false;
+    bool pause = false;                                 // If true, disables game logic
 
-    float failTimer = 10f;
+    float failTimer = 10f;                               // Time before failing if progress is not made
 
     private void Start()
     {
+        // Initialize fish data and UI
         if (currentFishData != null)
         {
             ApplyFishData(currentFishData);
@@ -53,10 +51,14 @@ public class MashReel : MonoBehaviour
 
     private void OnEnable()
     {
+        // Ensure UI is resized and hook is positioned when enabled
         Resize();
         SetStaticHook();
     }
 
+    /// <summary>
+    /// Sets the current fish and applies its data.
+    /// </summary>
     public void SetFish(FishData fishData)
     {
         currentFishData = fishData;
@@ -64,6 +66,9 @@ public class MashReel : MonoBehaviour
         ResetFishing();
     }
 
+    /// <summary>
+    /// Applies fish-specific settings from FishData.
+    /// </summary>
     private void ApplyFishData(FishData fishData)
     {
         timerMultiplier = fishData.timeLimit;
@@ -75,10 +80,11 @@ public class MashReel : MonoBehaviour
         hookPower = Random.Range(fishData.hookPowerMin, fishData.hookPowerMax);
 
         Resize();
-        // Optionally, instantiate fishPrefab if needed
-        // fish.gameObject = Instantiate(fishData.fishPrefab, fish.position, Quaternion.identity);
     }
 
+    /// <summary>
+    /// Resets all gameplay variables for a new fishing attempt.
+    /// </summary>
     private void ResetFishing()
     {
         fishPosition = 0f;
@@ -87,7 +93,6 @@ public class MashReel : MonoBehaviour
         fishSpeed = 0f;
         hookPosition = 0.5f;
         hookProgress = 0f;
-        hookPullVelocity = 0f;
         pause = false;
     }
 
@@ -102,6 +107,9 @@ public class MashReel : MonoBehaviour
         ProgressCheck();
     }
 
+    /// <summary>
+    /// Resizes the hook zone UI to match the fishing area and hook size.
+    /// </summary>
     private void Resize()
     {
         float ySize = hookImage.rectTransform.rect.height;
@@ -111,13 +119,19 @@ public class MashReel : MonoBehaviour
         hook.localScale = ls;
     }
 
-    // Set the hook to the middle of the fishing zone and keep it there
+    /// <summary>
+    /// Sets the hook to the middle of the fishing zone.
+    /// </summary>
     private void SetStaticHook()
     {
         hookPosition = 0.5f;
         hook.position = Vector3.Lerp(bottomPivot.position, topPivot.position, hookPosition);
     }
 
+    /// <summary>
+    /// Handles mash input from mouse or touchscreen.
+    /// Only increases progress if fish is inside the hook zone.
+    /// </summary>
     private void MashInput()
     {
         bool mashPressed = false;
@@ -151,12 +165,15 @@ public class MashReel : MonoBehaviour
             }
             else
             {
-                // Optional: penalty for mashing at the wrong time
+                // Penalty for mashing at the wrong time
                 hookProgress -= hookProgressDegradationPower * 2;
             }
         }
     }
 
+    /// <summary>
+    /// Handles fish movement logic, picking new destinations at intervals.
+    /// </summary>
     private void Fishing()
     {
         fishTimer -= Time.deltaTime;
@@ -167,10 +184,14 @@ public class MashReel : MonoBehaviour
             fishDestination = Random.value;
         }
 
+        // Smoothly move fish towards its destination
         fishPosition = Mathf.SmoothDamp(fishPosition, fishDestination, ref fishSpeed, smoothMotion);
         fish.position = Vector3.Lerp(bottomPivot.position, topPivot.position, fishPosition);
     }
 
+    /// <summary>
+    /// Updates the progress bar and checks for catch/fail conditions.
+    /// </summary>
     private void ProgressCheck()
     {
         progressBarSlider.value = hookProgress;
@@ -201,8 +222,18 @@ public class MashReel : MonoBehaviour
         hookProgress = Mathf.Clamp(hookProgress, 0, 1f);
     }
 
+    /// <summary>
+    /// Event triggered when fish is caught.
+    /// </summary>
     public event System.Action OnFishCaught;
+    /// <summary>
+    /// Event triggered when fish is lost.
+    /// </summary>
     public event System.Action OnFishLost;
+
+    /// <summary>
+    /// Handles fish caught logic.
+    /// </summary>
     private void FishCaught()
     {
         pause = true;
@@ -210,6 +241,9 @@ public class MashReel : MonoBehaviour
         OnFishCaught?.Invoke();
     }
 
+    /// <summary>
+    /// Handles fish lost logic.
+    /// </summary>
     private void FishLost()
     {
         pause = true;

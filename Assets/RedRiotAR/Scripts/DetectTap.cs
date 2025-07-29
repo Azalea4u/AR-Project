@@ -5,6 +5,7 @@ public class DetectTap : MonoBehaviour
 {
     [SerializeField] Canvas canvas;
     [SerializeField] InputActionAsset inputActions;
+    [SerializeField] FishManager fishManager;
 
     private InputAction tapAction;
     private InputAction tapPositionAction;
@@ -48,6 +49,7 @@ public class DetectTap : MonoBehaviour
                     canvas.enabled = false;
                     Debug.Log("Tapped on AR Object: " + hit.collider.name);
                     // Add minigame logic here
+                    FishManager.instance.Castline();
                 }
             }
         }
