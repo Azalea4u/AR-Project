@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8341b70b296903048b4facb4e1d51d1d, type: 3}
+  m_Name: Fish_03
+  m_EditorClassIdentifier: 
+  fishName: Fish_03
+  MashMin: 5
+  MashMax: 10
+  timeLimit: 30
+  fishMoveSpeed: 0.5
+  fishPrefab: {fileID: 1793456495386761642, guid: 5d99aa1c03c23414c8e892e91cb5e51c,
+    type: 3}
+  hookSizeMin: 0.1
+  hookSizeMax: 0.15
+  hookPowerMin: 1.5
+  hookPowerMax: 1.8
