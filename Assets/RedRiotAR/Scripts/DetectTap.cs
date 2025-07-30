@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -65,7 +66,13 @@ public class DetectTap : MonoBehaviour
 
     public void Reset()
     {
-        minigameActive = false;
+        StartCoroutine(ReloadMinigame());
         canvas.enabled = true;
+    }
+
+    private IEnumerator ReloadMinigame()
+    {
+        yield return new WaitForSeconds(1f);
+        minigameActive = false;
     }
 }
