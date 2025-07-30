@@ -43,35 +43,10 @@ public class FishManager : MonoBehaviour
             FishPanel.SetActive(false);
     }
 
-    /// <summary>
-    /// Begins the fishing process by enabling the UI and waiting for a bite.
-    /// </summary>
-    public void Castline()
+    public void StartFishing()
     {
         if (FishPanel != null)
             FishPanel.SetActive(true);
-        StartCoroutine(WaitForBite());
-    }
-
-    /// <summary>
-    /// Coroutine that waits for a random time before selecting a fish and starting the minigame.
-    /// </summary>
-    private IEnumerator WaitForBite()
-    {
-        yield return new WaitForSeconds(Random.Range(2f, 5f));
-        FishData selectedFish = GetRandomFish();
-
-        if (selectedFish != null && mashReel != null)
-        {
-            mashReel.SetFish(selectedFish);
-        }
-    }
-
-    /// <summary>
-    /// Immediately starts fishing with a randomly selected fish.
-    /// </summary>
-    public void StartFishing()
-    {
         FishData selectedFish = GetRandomFish();
 
         if (selectedFish != null && mashReel != null)
