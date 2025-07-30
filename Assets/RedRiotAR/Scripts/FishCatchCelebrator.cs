@@ -4,6 +4,7 @@ using UnityEngine;
 public class FishCatchCelebrator : MonoBehaviour
 {
     [SerializeField] private Canvas TitleUI;
+    [SerializeField] private AudioSource fishCaught;
 
     private MashReel mashReel;
     private GameObject shownFish;
@@ -20,6 +21,7 @@ public class FishCatchCelebrator : MonoBehaviour
     private void Celebrate()
     {
         if (TitleUI != null) TitleUI.enabled = true;  // Show celebratory text
+        fishCaught.Play();
 
         // Uncomment if currentFishData is made public
         // Otherwise, will need to find another way
