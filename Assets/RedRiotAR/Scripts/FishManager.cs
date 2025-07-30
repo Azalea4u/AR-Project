@@ -8,6 +8,7 @@ public class FishManager : MonoBehaviour
     public FishData[] fishTypes;                    // Array of available fish types
     public MashReel mashReel;                       // Reference to the MashReel minigame
     [SerializeField] private GameObject FishPanel;  // Main fishing UI canvas
+    [SerializeField] private DetectTap detectTap; // Reference to the DetectTap script
 
     private void Awake()
     {
@@ -39,8 +40,8 @@ public class FishManager : MonoBehaviour
     /// </summary>
     private void HandleFishingEnd()
     {
-        if (FishPanel != null)
-            FishPanel.SetActive(false);
+        if (FishPanel != null) FishPanel.SetActive(false);
+        if (detectTap != null) detectTap.Reset();
     }
 
     /// <summary>
