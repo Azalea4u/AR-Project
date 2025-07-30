@@ -60,7 +60,7 @@ public class DetectTap : MonoBehaviour
     {
         minigameActive = true;
         canvas.enabled = false;
-        FishManager.instance.Castline();
+        FishManager.instance.StartFishing();
     }
 
     public void Reset()

@@ -39,10 +39,16 @@ public class MashReel : MonoBehaviour
 
     float failTimer = 10f;                               // Time before failing if progress is not made
 
+    [Header("Audios")]
+    [SerializeField] private AudioSource startFishing;
+    [SerializeField] private AudioSource fishCaught;
+    [SerializeField] private AudioSource fishLost;
+
     [Header("Input System")]
     [SerializeField] private InputActionAsset inputActions;
     private InputAction tapAction;
     private InputAction tapPositionAction;
+
 
     private void Awake()
     {
@@ -83,6 +89,8 @@ public class MashReel : MonoBehaviour
         currentFishData = fishData;
         ApplyFishData(fishData);
         ResetFishing();
+        if (startFishing != null)
+            startFishing.Play();
     }
 
     // Applies fish-specific settings from FishData.
@@ -214,6 +222,8 @@ public class MashReel : MonoBehaviour
     private void FishCaught()
     {
         pause = true;
+        if (fishCaught != null)
+            fishCaught.Play();
         Debug.Log("FISH CAUGHT!");
         OnFishCaught?.Invoke();
     }
@@ -221,6 +231,8 @@ public class MashReel : MonoBehaviour
     private void FishLost()
     {
         pause = true;
+        if (fishLost != null)
+            fishLost.Play();
         Debug.Log("FISH LOST!");
         OnFishLost?.Invoke();
     }
