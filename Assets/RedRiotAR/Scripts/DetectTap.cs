@@ -49,7 +49,7 @@ public class DetectTap : MonoBehaviour
                 {
                     Debug.Log("Tapped on AR Object: " + hit.collider.name);
                     // Add minigame logic here
-                    FishManager.instance.StartFishing();
+                    CastLine();
 
                 }
             }
