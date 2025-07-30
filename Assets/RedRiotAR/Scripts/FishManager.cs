@@ -1,5 +1,7 @@
 using System.Collections;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FishManager : MonoBehaviour
 {
@@ -78,5 +80,11 @@ public class FishManager : MonoBehaviour
             FishPanel.SetActive(false);
         }
         mashReel.Reset(); // Reset the minigame state
+    }
+
+    public void ResetScene()
+    {
+        // Reloads the currently active scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
