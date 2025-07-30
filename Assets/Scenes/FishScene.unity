@@ -1769,6 +1769,11 @@ PrefabInstance:
       objectReference: {fileID: 5708857}
     - target: {fileID: 1642494057097748682, guid: 1db62cf32e6faef43b6e21b5922e415d,
         type: 3}
+      propertyPath: detectTap
+      value: 
+      objectReference: {fileID: 752028068}
+    - target: {fileID: 1642494057097748682, guid: 1db62cf32e6faef43b6e21b5922e415d,
+        type: 3}
       propertyPath: fishCaught_Text
       value: 
       objectReference: {fileID: 1358090188}

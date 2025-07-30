@@ -9,6 +9,7 @@ public class DetectTap : MonoBehaviour
 
     private InputAction tapAction;
     private InputAction tapPositionAction;
+    private bool minigameActive = false;
 
     private void Awake()
     {
@@ -31,7 +32,7 @@ public class DetectTap : MonoBehaviour
     {
         Debug.Log("Tap detected");
         // Check if the tap action was triggered
-        if (context.performed)
+        if (context.performed && !minigameActive)
         {
             // Get the touch position
             Vector2 touchPosition = tapPositionAction.ReadValue<Vector2>();
@@ -46,12 +47,25 @@ public class DetectTap : MonoBehaviour
                 // Check if the ray hit a specific object by its tag or component
                 if (hit.collider.CompareTag("Pond"))
                 {
-                    canvas.enabled = false;
                     Debug.Log("Tapped on AR Object: " + hit.collider.name);
                     // Add minigame logic here
                     FishManager.instance.StartFishing();
+
                 }
             }
         }
+    }
+
+    public void CastLine()
+    {
+        minigameActive = true;
+        canvas.enabled = false;
+        FishManager.instance.Castline();
+    }
+
+    public void Reset()
+    {
+        minigameActive = false;
+        canvas.enabled = true;
     }
 }
